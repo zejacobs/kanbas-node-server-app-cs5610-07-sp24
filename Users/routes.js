@@ -64,9 +64,14 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
 
   const getCurrentUser = async (req, res) => {
-    res.json(req.session["currentUser"]);
+    const currentUser = req.session["currentUser"];
+    if (currentUser) {
+      res.json(currentUser);
+    } else {
+      res.json("test");
+    }
   };
-  app.get("/api/users/currentUser", getCurrentUser);
+  app.get("/api/users/currentuser", getCurrentUser);
 
   const profile = async (req, res) => {
     const currentUser = req.session["currentUser"];
